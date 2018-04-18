@@ -37,7 +37,21 @@ let myLayers = {
 
 
 myMap.addLayer(myLayers.bmapgrau);
-myMap.setView([47.267,11.383], 11);
 
+
+
+let myMapControl = L.control.layers({
+    "Openstreetmap" : myLayers.osm,
+    "Basemap" : myLayers.geolandbasemap,
+    "Basemap Overlay" : myLayers.bmapoverlay,
+    "Basemap grau" : myLayers.bmapgrau,
+    "Basemap high dpi" : myLayers.bmaphidpi,
+    "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
+});
+
+myMap.addControl(myMapControl);
+
+
+myMap.setView([47.267,11.383], 11);
 
 
