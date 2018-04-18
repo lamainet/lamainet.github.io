@@ -43,10 +43,12 @@ myMap.addLayer(myLayers.bmapgrau);
 let myMapControl = L.control.layers({
     "Openstreetmap" : myLayers.osm,
     "Basemap" : myLayers.geolandbasemap,
-    "Basemap Overlay" : myLayers.bmapoverlay,
+    
     "Basemap grau" : myLayers.bmapgrau,
     "Basemap high dpi" : myLayers.bmaphidpi,
     "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
+}, {
+    "Basemap Overlay" : myLayers.bmapoverlay,
 });
 
 myMap.addControl(myMapControl);
