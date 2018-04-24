@@ -63,3 +63,13 @@ myMap.setView([47.267,11.383], 11);	//http://leafletjs.com/reference-1.3.0.html#
 
 
 myMapControl.expand(); //http://leafletjs.com/reference-1.3.0.html#control-layers-expand
+
+
+let myScale = L.control.scale ({	//http://leafletjs.com/reference-1.3.0.html#control-scale
+	position : "bottomleft",	//http://leafletjs.com/reference-1.3.0.html#control-position
+	metric : true,	//http://leafletjs.com/reference-1.3.0.html#control-scale-metric
+	imperial : false,	//http://leafletjs.com/reference-1.3.0.html#control-scale-imperial
+	maxWidth : 200,	//http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
+});
+
+L.control.scale(myScale).addTo(myMap);	
