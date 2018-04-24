@@ -52,6 +52,8 @@ let myMapControl = L.control.layers({	//http://leafletjs.com/reference-1.3.0.htm
     "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
 }, {
     "Basemap Overlay" : myLayers.bmapoverlay,
+}, {
+	position : "topright"		//http://leafletjs.com/reference-1.3.0.html#control-position
 });
 
 myMap.addControl(myMapControl);	//http://leafletjs.com/reference-1.3.0.html#map-addcontrol
@@ -60,3 +62,4 @@ myMap.addControl(myMapControl);	//http://leafletjs.com/reference-1.3.0.html#map-
 myMap.setView([47.267,11.383], 11);	//http://leafletjs.com/reference-1.3.0.html#map-setview
 
 
+myMapControl.expand(); //http://leafletjs.com/reference-1.3.0.html#control-layers-expand
