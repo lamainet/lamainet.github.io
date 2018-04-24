@@ -72,4 +72,4 @@ let myScale = L.control.scale ({	//http://leafletjs.com/reference-1.3.0.html#con
 	maxWidth : 200,	//http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
 });
 
-L.control.scale(myScale).addTo(myMap);	
+myScale.addTo(myMap);	
