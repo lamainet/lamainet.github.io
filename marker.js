@@ -107,6 +107,12 @@ L.marker(technik, markerOptions).addTo(markerGroup);
 L.marker(igls, markerOption2).addTo(markerGroup);
 L.marker(patscherkofel, markerOption3).addTo(markerGroup).bindPopup("<p>Patscherkofel von Igls aus</p><img style='width:200px' src='patscho.jpg' alt='Patscherkofel' />").openPopup();
 
+
 myMap.fitBounds(markerGroup.getBounds());
 
 
+let linieKoord = [igls, patscherkofel];
+
+let linie = L.polyline(linieKoord, {color: 'red'}).addTo(myMap);
+
+myMap.fitBounds(linie.getBounds());
