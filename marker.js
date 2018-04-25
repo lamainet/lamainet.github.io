@@ -45,8 +45,7 @@ myMap.addLayer(myLayers.bmapgrau);	//http://leafletjs.com/reference-1.3.0.html#m
 
 let myMapControl = L.control.layers({	//http://leafletjs.com/reference-1.3.0.html#control-layers-l-control-layers
     "Openstreetmap" : myLayers.osm,
-    "Basemap" : myLayers.geolandbasemap,
-    
+    "Basemap" : myLayers.geolandbasemap,   
     "Basemap grau" : myLayers.bmapgrau,
     "Basemap high dpi" : myLayers.bmaphidpi,
     "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
@@ -54,6 +53,8 @@ let myMapControl = L.control.layers({	//http://leafletjs.com/reference-1.3.0.htm
     "Basemap Overlay" : myLayers.bmapoverlay,
 }, {
 	position : "topright"		//http://leafletjs.com/reference-1.3.0.html#control-position
+}, {
+    collapsed : false
 });
 
 myMap.addControl(myMapControl);	//http://leafletjs.com/reference-1.3.0.html#map-addcontrol
@@ -62,7 +63,7 @@ myMap.addControl(myMapControl);	//http://leafletjs.com/reference-1.3.0.html#map-
 myMap.setView([47.267,11.383], 11);	//http://leafletjs.com/reference-1.3.0.html#map-setview
 
 
-myMapControl.expand(); //http://leafletjs.com/reference-1.3.0.html#control-layers-expand
+
 
 
 let myScale = L.control.scale ({	//http://leafletjs.com/reference-1.3.0.html#control-scale
@@ -73,3 +74,18 @@ let myScale = L.control.scale ({	//http://leafletjs.com/reference-1.3.0.html#con
 });
 
 myScale.addTo(myMap);	
+
+
+const uni = [47.264, 11.385];
+const usi = [47.257, 11.356];
+const technik = [47.263, 11.343];
+const markerOptions = {
+    title : "Universität Innsbruck",
+    draggable : true
+};
+
+L.marker(uni, markerOptions).addTo(myMap);
+L.marker(usi, markerOptions).addTo(myMap);
+L.marker(technik, markerOptions).addTo(myMap);
+
+myMap.setView(uni, 14);
