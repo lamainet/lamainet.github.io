@@ -42,7 +42,6 @@ let myLayers = {
 myMap.addLayer(myLayers.bmapgrau);	//http://leafletjs.com/reference-1.3.0.html#map-addlayer
 
 
-
 let myMapControl = L.control.layers({	//http://leafletjs.com/reference-1.3.0.html#control-layers-l-control-layers
     "Openstreetmap" : myLayers.osm,
     "Basemap" : myLayers.geolandbasemap,   
@@ -79,13 +78,19 @@ myScale.addTo(myMap);
 const uni = [47.264, 11.385];
 const usi = [47.257, 11.356];
 const technik = [47.263, 11.343];
+
+let markerGroup = L.featureGroup();
+myMap.addLayer(markerGroup);
+
 const markerOptions = {
     title : "Universität Innsbruck",
     draggable : true
 };
 
-L.marker(uni, markerOptions).addTo(myMap);
-L.marker(usi, markerOptions).addTo(myMap);
-L.marker(technik, markerOptions).addTo(myMap);
+L.marker(uni, markerOptions).addTo(markerGroup);
+L.marker(usi, markerOptions).addTo(markerGroup);
+L.marker(technik, markerOptions).addTo(markerGroup);
 
-myMap.setView(uni, 14);
+myMap.fitBounds(markerGroup.getBounds());
+
+
