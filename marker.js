@@ -62,6 +62,7 @@ let myMapControl = L.control.layers({	//http://leafletjs.com/reference-1.3.0.htm
 myMap.addControl(myMapControl);	//http://leafletjs.com/reference-1.3.0.html#map-addcontrol
 
 
+
 myMap.setView([47.267,11.383], 11);	//http://leafletjs.com/reference-1.3.0.html#map-setview
 
 
@@ -81,6 +82,8 @@ myScale.addTo(myMap);
 const uni = [47.264, 11.385];
 const usi = [47.257, 11.356];
 const technik = [47.263, 11.343];
+const igls = [47.231, 11.409];
+const patscherkofel = [47.209, 11.461];
 
 
 
@@ -89,9 +92,20 @@ const markerOptions = {
     draggable : true
 };
 
+const markerOption2 = {
+    title : "Igls"
+};
+
+const markerOption3 = {
+    title : "Patscherkofel"
+};
+
+
 L.marker(uni, markerOptions).addTo(markerGroup);
 L.marker(usi, markerOptions).addTo(markerGroup);
 L.marker(technik, markerOptions).addTo(markerGroup);
+L.marker(igls, markerOption2).addTo(markerGroup);
+L.marker(patscherkofel, markerOption3).addTo(markerGroup).bindPopup("<p>Patscherkofel von Igls aus</p><img style='width:200px' src='patscho.jpg' alt='Patscherkofel' />").openPopup();
 
 myMap.fitBounds(markerGroup.getBounds());
 
