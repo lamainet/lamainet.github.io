@@ -1,4 +1,6 @@
 let myMap = L.map("mapdiv");	//http://leafletjs.com/reference-1.3.0.html#map-l-map
+let markerGroup = L.featureGroup();
+myMap.addLayer(markerGroup);
 let myLayers = {
     osm : L.tileLayer(	//http://leafletjs.com/reference-1.3.0.html#tilelayer
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -50,6 +52,7 @@ let myMapControl = L.control.layers({	//http://leafletjs.com/reference-1.3.0.htm
     "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
 }, {
     "Basemap Overlay" : myLayers.bmapoverlay,
+    "Marker" : markerGroup,
 }, {
 	position : "topright"		//http://leafletjs.com/reference-1.3.0.html#control-position
 }, {
@@ -79,8 +82,7 @@ const uni = [47.264, 11.385];
 const usi = [47.257, 11.356];
 const technik = [47.263, 11.343];
 
-let markerGroup = L.featureGroup();
-myMap.addLayer(markerGroup);
+
 
 const markerOptions = {
     title : "Universität Innsbruck",
