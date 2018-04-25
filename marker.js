@@ -116,3 +116,8 @@ let linieKoord = [igls, patscherkofel];
 let linie = L.polyline(linieKoord, {color: 'red'}).addTo(myMap);
 
 myMap.fitBounds(linie.getBounds());
+
+let uniPolygon = L.polygon([uni, usi, technik]);
+myMap.addLayer(uniPolygon);
+
+myMap.fitBounds(markerGroup.getBounds());
