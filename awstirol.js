@@ -110,3 +110,6 @@ L.marker(w28).addTo(markerGroup).bindPopup("<p>Tuxerjoch Schneestation<br />Temp
 L.marker(w29).addTo(markerGroup).bindPopup("<p>Tuxerjoch Windstation<br />Temperatur: 1,5<br />Datum: 26.04.2018<br /></p><a href='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/tuxerjoch.png'>aktuelles Wetter</a>").openPopup();
 L.marker(w30).addTo(markerGroup).bindPopup("<p>Wandspitze Schneestation<br />Temperatur: 1,3<br />Datum: 26.04.2018<br /></p><a href='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/wandspitze.png'>aktuelles Wetter</a>").openPopup();
 L.marker(w31).addTo(markerGroup).bindPopup("<p>Wandspitze Windstation<br />Temperatur: -0,3<br />Datum: 26.04.2018<br /></p><a href='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/wandspitze.png'>aktuelles Wetter</a>").openPopup();
+
+
+myMap.fitBounds(markerGroup.getBounds());
