@@ -21,6 +21,7 @@ myMap.addLayer(myLayers.geolandbasemap);
 myMap.setView([47.267,11.383], 11);
 
 
+
 let myMapControl = L.control.layers({
     "Basemap" : myLayers.geolandbasemap,
     "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
@@ -32,3 +33,14 @@ let myMapControl = L.control.layers({
 });
 
 myMap.addControl(myMapControl);
+
+
+
+let myScale = L.control.scale ({
+	position : "bottomleft",
+	metric : true,
+	imperial : false,
+	maxWidth : 200,
+});
+
+myScale.addTo(myMap);	
