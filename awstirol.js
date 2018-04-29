@@ -19,3 +19,16 @@ let myLayers = {
 myMap.addLayer(myLayers.geolandbasemap);
 
 myMap.setView([47.267,11.383], 11);
+
+
+let myMapControl = L.control.layers({
+    "Basemap" : myLayers.geolandbasemap,
+    "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
+}, {
+    "Wetterstationen" : markerGroup,
+}, {
+	position : "topright",
+	collapsed : false,
+});
+
+myMap.addControl(myMapControl);
