@@ -61,7 +61,7 @@ let myMapControl = L.control.layers({	//http://leafletjs.com/reference-1.3.0.htm
 myMap.addControl(myMapControl);	//http://leafletjs.com/reference-1.3.0.html#map-addcontrol
 
 
-myMap.setView([47.267,11.383], 11);	//http://leafletjs.com/reference-1.3.0.html#map-setview
+// myMap.setView([47.267,11.383], 11);	//http://leafletjs.com/reference-1.3.0.html#map-setview
 
 
 myMapControl.expand(); //http://leafletjs.com/reference-1.3.0.html#control-layers-expand
@@ -76,15 +76,39 @@ let myScale = L.control.scale ({	//http://leafletjs.com/reference-1.3.0.html#con
 
 myScale.addTo(myMap);	
 
+const myIcon = L.icon({
+    iconUrl: 'pirates.png'
+})
 
+async function addGeojson(url) {
+    console.log("Url wird geladen: ", url);
+    const response = await fetch(url);
+    console.log("Response: ", response);
+    const wiendata = await response.json();
+    console.log("GeoJSON: ", wiendata);
+    const geojson = L.geoJSON(wiendata, {
+        style: function(feature) {
+            return { color: "#ff0000" }
+        },
+        pointToLayer: function(geoJsonPoin, latlng) {
+            return L.marker(latlng, {
+                icon: myIcon
+            })
+        }
+    });
+    spazGroup.addLayer(geojson);
+    myMap.fitBounds(spazGroup.getBounds());
+
+    L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);
+};
+
+
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&srsName=EPSG:4326&outputFormat=json&typeName=ogdwien:SPAZIERPUNKTOGD,ogdwien:SPAZIERLINIEOGD";
+
+addGeojson(url);
 
 myMap.addLayer(spazGroup);
-let geojson = L.geoJSON(spazdata).addTo(spazGroup);
-geojson.bindPopup(function(layer) {
-    const props = layer.feature.properties;
-    const popupText = `<h1>${props.NAME}</h1>
-    <p>Adresse: ${props.ADRESSE}</p>`;
-   return popupText;
-});
 
-myMap.fitBounds(spazGroup.getBounds());
+spazGroup.icon(pirates);
+
+
