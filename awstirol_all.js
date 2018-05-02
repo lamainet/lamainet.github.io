@@ -73,3 +73,8 @@ let myScale = L.control.scale ({	//http://leafletjs.com/reference-1.3.0.html#con
 });
 
 myScale.addTo(myMap);	
+
+console.log("Stationen: ", stationen);
+
+L.geoJSON(stationen).addTo(myMap);
+
