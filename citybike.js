@@ -56,10 +56,23 @@ myScale.addTo(myMap);
 
 
 
-L.geoJson(citybikedata).addTo(bikeGroup);
+let myIcon = L.icon({
+    iconUrl: 'bikes.png'
+})
+
+L.geoJson(citybikedata, {
+	pointToLayer: function(geoJsonPoint, latlng) {
+            return L.marker(latlng, {
+                icon: myIcon
+            })
+}
+}).addTo(bikeGroup);
 
 myMap.addLayer(bikeGroup);
 
 myMap.fitBounds(bikeGroup.getBounds());
+
+
+
 
 
