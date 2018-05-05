@@ -53,3 +53,13 @@ let myScale = L.control.scale ({
 
 myScale.addTo(myMap);	
 
+
+
+
+
+L.geoJson(sightsdata).addTo(sightsGroup);
+
+myMap.addLayer(sightsGroup);
+
+myMap.fitBounds(sightsGroup.getBounds());
+
