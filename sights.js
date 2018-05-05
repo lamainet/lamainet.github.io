@@ -56,8 +56,17 @@ myScale.addTo(myMap);
 
 
 
+let myIcon = L.icon({
+    iconUrl: 'camera.png'
+})
 
-L.geoJson(sightsdata).addTo(sightsGroup);
+L.geoJson(sightsdata, {
+	pointToLayer: function(geoJsonPoint, latlng) {
+            return L.marker(latlng, {
+                icon: myIcon
+            })
+}
+}).addTo(sightsGroup);
 
 myMap.addLayer(sightsGroup);
 
