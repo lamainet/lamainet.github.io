@@ -1,4 +1,4 @@
-let myMap = L.map("mapdiv");	//http://leafletjs.com/reference-1.3.0.html#map-l-map
+let myMap = L.map("mapdiv");	
 const bikeGroup = L.featureGroup();
 let myLayers = {
     geolandbasemap : L.tileLayer(
@@ -17,34 +17,31 @@ let myLayers = {
         "https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
             subdomains : ["maps", "maps1", "maps2", "maps3", "maps4"],
             attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
-        }
+    }
     ),
-}
+};
 
 
-myMap.addLayer(myLayers.bmapgrau);	
+myMap.addLayer(myLayers.geolandbasemap);	
 
 
 
-let myMapControl = L.control.layers({	
-    "Openstreetmap" : myLayers.osm,
+
+let myMapControl = L.control.layers({
     "Basemap" : myLayers.geolandbasemap,
-    "Basemap grau" : myLayers.bmapgrau,
-    "Basemap high dpi" : myLayers.bmaphidpi,
     "Orthofoto 30cm" : myLayers.bmaporthofoto30cm,
 }, {
     "Basemap Overlay" : myLayers.bmapoverlay,
+    "Citybike Standpunkte" : bikeGroup,
 }, {
 	position : "topright"		
 });
 
 myMap.addControl(myMapControl);	
 
-
-// myMap.setView([47.267,11.383], 11);	
-
-
 myMapControl.expand(); 
+
+
 
 
 let myScale = L.control.scale ({	
@@ -59,5 +56,10 @@ myScale.addTo(myMap);
 
 
 
+L.geoJson(citybikedata).addTo(bikeGroup);
+
+myMap.addLayer(bikeGroup);
+
+myMap.fitBounds(bikeGroup.getBounds());
 
 
