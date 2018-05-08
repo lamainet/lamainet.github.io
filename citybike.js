@@ -60,13 +60,21 @@ let myIcon = L.icon({
     iconUrl: 'bikes.png'
 })
 
-L.geoJson(citybikedata, {
+let geojson = L.geoJson(citybikedata, {
 	pointToLayer: function(geoJsonPoint, latlng) {
             return L.marker(latlng, {
                 icon: myIcon
             })
 }
 }).addTo(bikeGroup);
+
+
+geojson.bindPopup(function(layer) {
+	const props = layer.features.properties;
+	const popupText = `<h1>${props.NAME}</h1>
+	<p>Adresse: ${props.ADRESSE}</p>`;
+	return popupText;
+});
 
 myMap.addLayer(bikeGroup);
 

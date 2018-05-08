@@ -56,19 +56,32 @@ myScale.addTo(myMap);
 
 
 
+
 let myIcon = L.icon({
     iconUrl: 'camera.png'
 })
 
-L.geoJson(sightsdata, {
+let geojson = L.geoJson(sightsdata, {
 	pointToLayer: function(geoJsonPoint, latlng) {
             return L.marker(latlng, {
                 icon: myIcon
             })
-}
+	}	
 }).addTo(sightsGroup);
+
+
+geojson.bindPopup(function(layer) {
+	const props = layer.features.properties;
+	const popupText = `<h1>${props.NAME}</h1>
+	<p>Adresse: ${props.ADRESSE}</p>`;
+	return popupText;
+});
+
 
 myMap.addLayer(sightsGroup);
 
 myMap.fitBounds(sightsGroup.getBounds());
+
+
+
 
