@@ -1,5 +1,5 @@
 let myMap = L.map("mapdiv");	
-const bikeGroup = L.featureGroup();
+const bikeGroup = L.markerClusterGroup();
 let myLayers = {
     geolandbasemap : L.tileLayer(
         "https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
@@ -76,9 +76,22 @@ geojson.bindPopup(function(layer) {
 	return popupText;
 });
 
+const hash = new L.Hash(myMap);
+
+myMap.addControl( new L.Control.Search({
+    layer: bikeGroup,
+    propertyName: 'STATION'
+}) );
+
+//let markers = L.markerClusterGroup();
+//markers.addLayer(geojson);
+//myMap.addLayer(markers);
+
+
+
 myMap.addLayer(bikeGroup);
 
-myMap.fitBounds(bikeGroup.getBounds());
+//myMap.fitBounds(bikeGroup.getBounds());
 
 
 
