@@ -18,7 +18,7 @@
 
 // Maßstab metrisch ohne inch	CHECK
 
-// Start- und Endpunkte der Route als Marker mit Popup, Namen, Wikipedia Link und passenden Icons für Start/Ziel von https://mapicons.mapsmarker.com/	CHECK
+// Start- und Endpunkte der Route als Marker mit Popup, Namen, Wikipedia Link und passenden Icons für Start/Ziel von https://mapicons.mapsmarker.com/	THEORETISCH CHECK
 
 // GeoJSON Track als Linie in der Karte einzeichnen und auf Ausschnitt zoomen	THEORETISCH CHECK
 // Einbauen nicht über async, sondern über ein L.geoJSON() mit einem Javascript Objekt (wie beim ersten Stadtspaziergang Wien Beispiel)	THEORETISCH CHECK
@@ -95,7 +95,7 @@ let myMapControl = L.control.layers({
 }, {
     "Overlay" : myLayers.bmapoverlay,
     "Start-Ziel" : markerGroup,
-   // "Route" : trailGroup,
+   	//"Route" : line,
 }, {
 	position : "topright"
 });
@@ -123,12 +123,18 @@ myMap.setView([47.267,11.383], 11);
 
 
 /*
+VERSUCH 1
+
 let geojson = L.geoJSON(traildata).addTo(trailGroup);
 
 myMap.addLayer(trailGroup);
 
 myMap.fitBounds(trailGroup.getBounds());
+
+
+let line = L.polyline(geojson, {color: 'blue'}).addTo(myMap);
 */
+
 
 
 
@@ -170,22 +176,29 @@ myMap.fitBounds(markerGroup.getBounds());
 
 
 
-/*let latlong = coordsToLatLng(traildata);
+/*
+VERSUCH 2
+
+let latlong = coordsToLatLng(traildata);
 
 latlong.addTo(trailGroup);
 
 myMap.addLayer(trailGroup);
 
-myMap.fitBounds(trailGroup.getBounds());*/
+myMap.fitBounds(trailGroup.getBounds());
+*/
 
 
 
 
+/*
+VERSUCH 3
 
-/*let geojson = L.geoJSON(traildata);
+let geojson = L.geoJSON(traildata);
 
 geojson.addTo(trailGroup);
 
 myMap.addLayer(trailGroup);
 
-myMap.fitBounds(trailGroup.getBounds());*/
+myMap.fitBounds(trailGroup.getBounds());
+*/
