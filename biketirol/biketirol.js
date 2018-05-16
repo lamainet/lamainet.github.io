@@ -31,8 +31,8 @@
 
 
 let myMap = L.map("map");
-//const trailGroup = L.featureGroup();
-const markerGroup = L.featureGoup();
+const trackGroup = L.featureGroup();
+//const markerGroup = L.featureGoup();
 
 
 let myLayers = {
@@ -94,8 +94,8 @@ let myMapControl = L.control.layers({
     */
 }, {
     "Overlay" : myLayers.bmapoverlay,
-    "Start-Ziel" : markerGroup,
-   	//"Route" : line,
+    //"Start-Ziel" : markerGroup,
+   	"Route" : trackGroup,
 }, {
 	position : "topright"
 });
@@ -103,7 +103,7 @@ let myMapControl = L.control.layers({
 myMap.addControl(myMapControl);
 myMapControl.expand();
 
-
+myMap.addControl(new L.Control.Fullscreen());
 
 
 
@@ -122,23 +122,42 @@ myScale.addTo(myMap);
 myMap.setView([47.267,11.383], 11);
 
 
-/*
-VERSUCH 1
 
+let gpxTrack = new L.GPX ("data/etappe20.gpx", {
+    async : true,
+}).addTo(trackGroup);
+
+gpxTrack.on("loaded", function(evt) {
+    console.log("get distance",evt.target.get_distance().toFixed(0))
+    console.log("get_elevation_min",evt.target.get_elevation_min().toFixed(0))
+    console.log("get_elevation_max",evt.target.get_elevation_max().toFixed(0))
+    console.log("get_elevation_gain",evt.target.get_elevation_gain().toFixed(0))
+    console.log("get_elevation_loss",evt.target.get_elevation_loss().toFixed(0))
+    let laenge = evt.target.get_distance().toFixed(0);
+    document.getElementById("laenge").innerHTML = laenge;
+    myMap.fitBounds(evt.target.getBounds());
+}).addTo(myMap);
+
+
+
+
+
+
+/*
 let geojson = L.geoJSON(traildata).addTo(trailGroup);
 
 myMap.addLayer(trailGroup);
 
 myMap.fitBounds(trailGroup.getBounds());
 
-
+/*
 let line = L.polyline(geojson, {color: 'blue'}).addTo(myMap);
 */
 
 
 
 
-
+/*
 let startIcon = L.icon({
 	iconUrl: 'start.png'
 })
