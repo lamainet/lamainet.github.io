@@ -101,11 +101,15 @@ myMap.setView([47.267,11.383], 11);
 
 
 let startIcon = L.icon({
-	iconUrl: './images/start.png'
+	iconUrl: './images/start.png',
+	iconAnchor : [16,37],
+    popupAnchor : [0,-37],
 })
 
 let endIcon = L.icon({
-	iconUrl: './images/end.png'
+	iconUrl: './images/end.png',
+	iconAnchor : [16,37],
+    popupAnchor : [0,-37],
 })
 
 const start = [47.298546,11.665867];
