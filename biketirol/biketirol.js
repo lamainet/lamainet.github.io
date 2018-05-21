@@ -80,14 +80,26 @@ let myLayers = {
 myMap.addLayer(myLayers.geolandbasemap);
 
 
+const tirisSommer = L.layerGroup([
+    myLayers.tirolsommer,
+    myLayers.tirolname
+]);
+const tirisWinter = L.layerGroup([
+    myLayers.tirolwinter,
+    myLayers.tirolname
+]);
+const tirisOrtho = L.layerGroup([
+    myLayers.tirolortho,
+    myLayers.tirolname
+]);
 
 
 let myMapControl = L.control.layers({
     "Openstreetmap" : myLayers.osm,
     "Basemap" : myLayers.geolandbasemap,
-    "Sommer" : myLayers.tirolsommer,
-    "Winter" : myLayers.tirolwinter,
-    "Orthofoto" : myLayers.tirolortho,
+    "Sommer" : tirisSommer,
+    "Winter" : tirisWinter,
+    "Orthofoto" : tirisOrtho,
 }, {
     "Overlay" : myLayers.bmapoverlay,
     "Start-Ziel" : markerGroup,
