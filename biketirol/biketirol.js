@@ -131,11 +131,12 @@ myMap.setView([47.267,11.383], 11);
 
 
 
-let gpxTrack = new L.GPX ("data/etappe20.gpx", {
+
+let gpxTrack = new L.GPX("data/etappe20.gpx", {
     async : true,
 }).addTo(trackGroup);
 
-gpxTrack.on("loaded", function(evt) {
+/*gpxTrack.on("loaded", function(evt) {
     console.log("get distance",evt.target.get_distance().toFixed(0))
     console.log("get_elevation_min",evt.target.get_elevation_min().toFixed(0))
     console.log("get_elevation_max",evt.target.get_elevation_max().toFixed(0))
@@ -145,8 +146,22 @@ gpxTrack.on("loaded", function(evt) {
     document.getElementById("laenge").innerHTML = laenge;
     myMap.fitBounds(evt.target.getBounds());
 }).addTo(myMap);
+*/
 
-
+gpxTrack.on("loaded", function(evt) {
+    let track = evt.target;
+    console.log("get_distance",       track.get_distance().toFixed(0))
+    console.log("get_elevation_min",  track.get_elevation_min().toFixed(0))
+    console.log("get_elevation_max",  track.get_elevation_max().toFixed(0))
+    console.log("get_elevation_gain", track.get_elevation_gain().toFixed(0))
+    console.log("get_elevation_loss", track.get_elevation_loss().toFixed(0))
+    document.getElementById("get_distance").innerHTML = track.get_distance().toFixed(0);
+    document.getElementById("get_elevation_min").innerHTML = track.get_elevation_min().toFixed(0);
+    document.getElementById("get_elevation_max").innerHTML = track.get_elevation_max().toFixed(0);
+    document.getElementById("get_elevation_gain").innerHTML = track.get_elevation_gain().toFixed(0);
+    document.getElementById("get_elevation_loss").innerHTML = track.get_elevation_loss().toFixed(0);
+    myMap.fitBounds(track.getBounds());
+});
 
 
 /* GeoJson einbinden über Objekt in einer .js Datei
