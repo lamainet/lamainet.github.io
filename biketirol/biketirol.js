@@ -1,6 +1,7 @@
 let myMap = L.map("map");
 const trackGroup = L.featureGroup();
 const markerGroup = L.featureGroup();
+let overlaySteigung = L.featureGroup().addTo(myMap);
 
 
 let myLayers = {
@@ -72,6 +73,7 @@ let myMapControl = L.control.layers({
     "Overlay" : myLayers.bmapoverlay,
     "Start-Ziel" : markerGroup,
     "Route" : trackGroup,
+    "Steigung" : overlaySteigung,
 }, {
 	position : "topright"
 });
@@ -159,6 +161,55 @@ gpxTrack.on("loaded", function(evt) {
     
 gpxTrack.on("addline", function(evt){
     hoehenProfil.addData(evt.line);
+    console.log(evt.line);
+    console.log(evt.line.getLatLngs());
+    console.log(evt.line.getLatLngs()[0].lat);
+    console.log(evt.line.getLatLngs()[0].lng);
+    console.log(evt.line.getLatLngs()[0].meta);
+    console.log(evt.line.getLatLngs()[0].meta.ele);
+
+    // alle Elemente Steigungslinie hinzufügen
+    let gpxLine = evt.line.getLatLngs();
+    for (let i = 1; i < gpxLine.length; i++) {
+        let p1 = gpxLine[i-1];
+        let p2 = gpxLine[i];
+       
+        // Distanz zwischen den Punkten berechnen
+        let dist = myMap.distance(
+            [p1.lat,p1.lng],
+            [p2.lat,p2.lng]
+        );
+        // console.log(p1.lat,p1.lng,p2.lat,p2.lng,dist);
+
+        // Höhenunterschied berechnen
+        let delta = p2.meta.ele - p1.meta.ele;
+        // console.log(p1.lat,p1.lng,p2.lat,p2.lng,dist,delta);
+
+        // Steigung in % berechnen
+        let proz = (dist > 0) ? (delta / dist * 100.0).toFixed(1) : 0;
+        // Bedingung ? Ausdruck1 : Ausdruck2
+        console.log(p1.lat,p1.lng,p2.lat,p2.lng,dist,delta,proz);
+
+        // http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=4
+        let farbe = 
+            proz > 10 ?  "#cb181d" : 
+            proz > 6 ?   "#fb6a4a" : 
+            proz > 2 ?   "#fcae91" : 
+            proz > 0 ?   "#fee5d9" : 
+            proz > -2 ?  "#edf8fb" : 
+            proz > -6 ?  "#b2e2e2" : 
+            proz > -10 ? "#66c2a4" : 
+                        "#238b45";
+
+        let segment = L.polyline(
+            [
+                [p1.lat,p1.lng],
+                [p2.lat,p2.lng],
+            ], {
+                color: farbe,
+                weight : 5,
+        }).addTo(overlaySteigung);
+    }
 })
 
 
