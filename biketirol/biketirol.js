@@ -130,6 +130,11 @@ myMap.addLayer(markerGroup);
 myMap.fitBounds(markerGroup.getBounds());
 
 
+//Höhenprofilcontrol hinzufügen https://github.com/MrMufflon/Leaflet.Elevation
+let hoehenProfil = L.control.elevation({
+    position: "topright",
+    theme: "steelblue-theme",
+}).addTo(myMap);
 
 let gpxTrack = new L.GPX("data/etappe20.gpx", {
     async: true
@@ -137,7 +142,7 @@ let gpxTrack = new L.GPX("data/etappe20.gpx", {
 
 
 gpxTrack.on("loaded", function(evt) {
-	let track = evt.target;
+    let track = evt.target;
     console.log("get_distance",       track.get_distance().toFixed(0))
     console.log("get_elevation_min",  track.get_elevation_min().toFixed(0))
     console.log("get_elevation_max",  track.get_elevation_max().toFixed(0))
@@ -151,4 +156,8 @@ gpxTrack.on("loaded", function(evt) {
     myMap.fitBounds(evt.target.getBounds());
 }).addTo(myMap);
     
-  
+gpxTrack.on("addline", function(evt){
+    hoehenProfil.addData(evt.line);
+})
+
+
