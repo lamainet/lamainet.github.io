@@ -71,7 +71,7 @@ let myMapControl = L.control.layers({
 }, {
     "Overlay" : myLayers.bmapoverlay,
     "Start-Ziel" : markerGroup,
-   	"Route" : trackGroup,
+    "Route" : trackGroup,
 }, {
 	position : "topright"
 });
@@ -134,6 +134,7 @@ myMap.fitBounds(markerGroup.getBounds());
 let hoehenProfil = L.control.elevation({
     position: "topright",
     theme: "steelblue-theme",
+    collapsed: true,
 }).addTo(myMap);
 
 let gpxTrack = new L.GPX("data/etappe20.gpx", {
